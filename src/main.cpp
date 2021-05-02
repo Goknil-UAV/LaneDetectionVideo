@@ -5,35 +5,29 @@
 #include <time.h>
 #include <vector>
 
-
-// First method can be training deep neural networks.
-// Second and simpler method is to use opencv.
-
 // https://www.analyticsvidhya.com/blog/2020/05/tutorial-real-time-lane-detection-opencv/?utm_source=blog&utm_medium=18_open-Source_computer_vision_projects
 
 int main(){
 
-    std::string path = "C:/Users/Kadir/Desktop/OpenCVProjects/LaneDetection/src/frames/";
-    cv::Mat img; // 480,270
+    std::string path = "C:/Users/Kadir/Desktop/OpenCVProjects/LaneDetection/src/frames/"; // 270, 480
+    cv::Mat img; 
 
     clock_t start, end;
 
     std::vector<cv::Point> roi_points = {cv::Point(50,270), cv::Point(220,160), cv::Point(360,160), cv::Point(480,270)};
 
-    // cv::Mat mask = cv::imread("C:/Users/Kadir/Desktop/OpenCVProjects/LaneDetection/src/mask.png",0);
-    
     cv::Mat mask(270, 480, CV_8UC3, cv::Scalar(0, 0, 0));
     
     cv::cvtColor(mask,mask,cv::COLOR_BGR2GRAY);
     cv::fillConvexPoly(mask,roi_points, 255);
-    std::cout<<mask.channels()<<std::endl;
+    
 
-    int x = 0, y = 0, z = 0;
+    int threshold = 0, minLineLength = 0, maxLineGap = 0;
     cv::namedWindow("TrackBars",(640,400));
     
-    cv::createTrackbar("X","TrackBars",&x,200);
-    cv::createTrackbar("Y","TrackBars",&y,200);
-    cv::createTrackbar("Z","TrackBars",&z,20);
+    cv::createTrackbar("Threshold","TrackBars",&threshold,200);
+    cv::createTrackbar("MinLineLen","TrackBars",&minLineLength,200);
+    cv::createTrackbar("MaxLineGap","TrackBars",&maxLineGap,20);
 
     for(int i=0;i<1108;i++){
         start = clock();
@@ -48,7 +42,7 @@ int main(){
         
         std::vector<cv::Vec4i> linesP;
         
-        cv::HoughLinesP(img, linesP, 1, CV_PI/180, x, y, z); 
+        cv::HoughLinesP(img, linesP, 1, CV_PI/180, threshold, minLineLength, maxLineGap); 
         
         // std::cout<<"Number of lines : "<<linesP.size()<<std::endl;
         for( size_t i = 0; i < linesP.size(); i++ )
