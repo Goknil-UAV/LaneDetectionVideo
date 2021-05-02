@@ -20,9 +20,13 @@ int main(){
 
     std::vector<cv::Point> roi_points = {cv::Point(50,270), cv::Point(220,160), cv::Point(360,160), cv::Point(480,270)};
 
-    cv::Mat mask = cv::imread("C:/Users/Kadir/Desktop/OpenCVProjects/LaneDetection/src/mask.png",0);
-
+    // cv::Mat mask = cv::imread("C:/Users/Kadir/Desktop/OpenCVProjects/LaneDetection/src/mask.png",0);
+    
+    cv::Mat mask(270, 480, CV_8UC3, cv::Scalar(0, 0, 0));
+    
+    cv::cvtColor(mask,mask,cv::COLOR_BGR2GRAY);
     cv::fillConvexPoly(mask,roi_points, 255);
+    std::cout<<mask.channels()<<std::endl;
 
     int x = 0, y = 0, z = 0;
     cv::namedWindow("TrackBars",(640,400));
@@ -37,8 +41,9 @@ int main(){
         img = cv::imread(path + std::to_string(i) + ".png",0);
         cv::Mat originalImg; 
         img.copyTo(originalImg);
-
+        
         cv::bitwise_and(img, mask, img);
+    
         cv::threshold( img, img, 130, 145, cv::THRESH_BINARY);
         
         std::vector<cv::Vec4i> linesP;
