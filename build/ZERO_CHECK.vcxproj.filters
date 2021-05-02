@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Kadir\Desktop\OpenCVProjects\LaneDetection\build\CMakeFiles\94a2410b7aa3b2c268b6444dfada2e5c\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{8CF6B411-9934-38EB-9CAA-1291EB5DC2EA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
