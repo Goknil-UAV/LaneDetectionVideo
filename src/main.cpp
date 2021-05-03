@@ -38,7 +38,7 @@ int main(){
         
         cv::bitwise_and(img, mask, img);
     
-        cv::threshold( img, img, 130, 145, cv::THRESH_BINARY);
+        cv::threshold(img, img, 130, 145, cv::THRESH_BINARY);
         
         std::vector<cv::Vec4i> linesP;
         
